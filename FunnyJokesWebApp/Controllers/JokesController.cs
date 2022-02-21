@@ -33,12 +33,12 @@ namespace FunnyJokesWebApp.Controllers
         }
 
         // POST: Jokes/ShowSearchResault
-        //public async Task<IActionResult> ShowSearchResults(String Searchphrase)
-        //{
-        //    return View("Index",await _context.Jokes.Where( j => j.JokeQuestion.Contains
-        //    (Searchphrase)).ToListAsync());
-        //}
-
+        public async Task<IActionResult> ShowSearchResults(String Searchphrase)
+        {
+            return View("Index", await _context.Jokes.Where(j => j.JokeQuestion.Contains
+            (Searchphrase)).ToListAsync());
+        }
+         
         // GET: Jokes/Details/5
         public async Task<IActionResult> Details(int? id)
         {
@@ -47,7 +47,7 @@ namespace FunnyJokesWebApp.Controllers
                 return NotFound();
             }
 
-            var jokes = await _context.Jokes
+            var jokes = await _context.Jokes 
                 .FirstOrDefaultAsync(m => m.ID == id);
             if (jokes == null)
             {
@@ -72,7 +72,7 @@ namespace FunnyJokesWebApp.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("ID,JokeQuestion,JokeAnswer")] Jokes jokes)
-        {
+        { 
             if (ModelState.IsValid)
             {
                 _context.Add(jokes);
